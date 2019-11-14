@@ -13,11 +13,9 @@ public class CreateShopRequestModel {
 	@Size(min=5,message="Your shop private name must have at least 5 characters.")
 	private String name;
 	
-	
-	//DOES NOT WORK; IS NOT RECOGNIZED FROM THE JSON OBJECT RECEIVED, TO SOLVE**********************
 	@NotNull(message="You must provide a password")
-	@Size(min=8,message="Your password name must have at least 8 characters.")
-	private String pass;
+	@Size(min=8, message= "password must not be shorter than 8 characters")
+	private String password;
 	
 	@NotNull(message="You must give an email to your shop, your customers need a way to contact you")
 	@Email
@@ -29,6 +27,12 @@ public class CreateShopRequestModel {
 	
 	
 	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public String getAlias() {
 		return alias;
 	}
@@ -59,7 +63,6 @@ public class CreateShopRequestModel {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
 	
 
 }
