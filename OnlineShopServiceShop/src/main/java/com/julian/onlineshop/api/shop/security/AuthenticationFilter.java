@@ -89,6 +89,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 		
 		res.addHeader("token", token);
 		res.addHeader("shopId", shopDetails.getShopID());
+		res.addHeader("expiration", environment.getProperty("token.expiration_time"));
 
 	}
 	
