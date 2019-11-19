@@ -27,6 +27,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
 		
 		http.authorizeRequests()
 		.antMatchers(environment.getProperty("shops.h2console.url.path")).permitAll()
+		.antMatchers(environment.getProperty("products.h2console.url.path")).permitAll()
 		.antMatchers(HttpMethod.POST,environment.getProperty("shops.registration.url.path")).permitAll()
 		.antMatchers(HttpMethod.POST,environment.getProperty("shops.login.url.path")).permitAll()
 		.anyRequest().authenticated()
