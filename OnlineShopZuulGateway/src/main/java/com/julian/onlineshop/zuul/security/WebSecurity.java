@@ -25,11 +25,18 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
 		http.csrf().disable();
 		http.headers().frameOptions().disable();
 		
+		String[] shopsSwaggerUrls = environment.getProperty("shops.swagger.urls.paths").split(",");
+		String[] productsSwaggerUrls = environment.getProperty("products.swagger.urls.paths").split(",");
+		
 		http.authorizeRequests()
 		.antMatchers(environment.getProperty("shops.h2console.url.path")).permitAll()
 		.antMatchers(environment.getProperty("products.h2console.url.path")).permitAll()
+		.antMatchers(shopsSwaggerUrls).permitAll()
+		.antMatchers(productsSwaggerUrls).permitAll()
 		.antMatchers(HttpMethod.POST,environment.getProperty("shops.registration.url.path")).permitAll()
 		.antMatchers(HttpMethod.POST,environment.getProperty("shops.login.url.path")).permitAll()
+		.antMatchers(HttpMethod.GET,environment.getProperty("products.listAll.url.path")).permitAll()
+		.antMatchers(HttpMethod.GET,environment.getProperty("products.listByShop.url.path")).permitAll()
 		.anyRequest().authenticated()
 		.and()
 		.addFilter(new AuthorizationFilter(authenticationManager(),environment));

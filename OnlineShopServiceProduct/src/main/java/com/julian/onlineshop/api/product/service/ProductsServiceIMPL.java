@@ -26,7 +26,7 @@ public class ProductsServiceIMPL implements ProductsService {
 	}
 
 	@Override
-	public ProductDto createShop(ProductDto productDetails) {
+	public ProductDto createProduct(ProductDto productDetails) {
 		productDetails.setProductID(UUID.randomUUID().toString());
 		
 		ModelMapper modelMapper = new ModelMapper();
@@ -50,6 +50,22 @@ public class ProductsServiceIMPL implements ProductsService {
 	@Override
 	public List<ProductDto> getProductByShop(String shopID) {
 		List<ProductEntity> productEntities = productsRepository.findByShopID(shopID);
+		List<ProductDto> returnValue = new ArrayList<>();
+		
+		if(productEntities == null || productEntities.isEmpty()) {
+			return returnValue;
+		}
+		
+		Type listType = new TypeToken<List<ProductDto>>(){}.getType();
+		
+		returnValue = new ModelMapper().map(productEntities, listType);
+		
+		return returnValue;
+	}
+	
+	@Override
+	public List<ProductDto> getAllProducts() {
+		List<ProductEntity> productEntities = (List<ProductEntity>) productsRepository.findAll();
 		List<ProductDto> returnValue = new ArrayList<>();
 		
 		if(productEntities == null || productEntities.isEmpty()) {
