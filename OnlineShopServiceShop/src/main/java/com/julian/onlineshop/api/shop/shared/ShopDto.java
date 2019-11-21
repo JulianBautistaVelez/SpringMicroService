@@ -5,6 +5,9 @@ package com.julian.onlineshop.api.shop.shared;
  */
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.julian.onlineshop.api.shop.model.ProductResponseModel;
 
 public class ShopDto implements Serializable {
 	
@@ -17,7 +20,8 @@ public class ShopDto implements Serializable {
 	private String email;
 	private String shopID;
 	private String encryptedPassword;
-
+	private List<ProductResponseModel> products;
+	
 	public String getAlias() {
 		return alias;
 	}
@@ -80,6 +84,14 @@ public class ShopDto implements Serializable {
 
 	public void setEncryptedPassword(String encryptedPassword) {
 		this.encryptedPassword = encryptedPassword;
+	}
+
+	public List<ProductResponseModel> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<ProductResponseModel> products) {
+		this.products = products;
 	}
 
 }
